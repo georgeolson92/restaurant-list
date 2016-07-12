@@ -9,16 +9,51 @@ namespace ToDoList
   {
     public HomeModule()
     {
-      Get["/"] =_=> View["index.cshtml"];
-      Post["allTasks"] =_=> {
-        Task newTask = new Task(Request.Form["newTask"], 1);
+      Get["/"] = _ => {
+        List<Category> AllCategories = Category.GetAll();
+        return View["index.cshtml", AllCategories];
+      };
+      Get["/tasks"] = _ => {
+        List<Task> AllTasks = Task.GetAll();
+        return View["tasks.cshtml", AllTasks];
+      };
+      Get["/categories"] = _ => {
+        List<Category> AllCategories = Category.GetAll();
+        return View["categories.cshtml", AllCategories];
+      };
+      Get["/categories/new"] = _ => {
+        return View["categories_form.cshtml"];
+      };
+      Post["/categories/new"] = _ => {
+        Category newCategory = new Category(Request.Form["category-name"]);
+        newCategory.Save();
+        return View["success.cshtml"];
+      };
+      Get["/tasks/new"] = _ => {
+        List<Category> AllCategories = Category.GetAll();
+        return View["task_form.cshtml", AllCategories];
+      };
+      Post["/tasks/new"] = _ => {
+        Task newTask = new Task(Request.Form["task-description"], Request.Form["category-id"]);
         newTask.Save();
-        return View["allTasks.cshtml", Task.GetAll()];
+        return View["success.cshtml"];
       };
-      Post["/clearedTasks"] =_=> {
-        Task.DeleteAll();
-        return View["index.cshtml"];
-      };
+      Post["/tasks/delete"] = _ => {
+       Task.DeleteAll();
+       return View["cleared.cshtml"];
+     };
+     Post["/categories/delete"] = _ => {
+      Category.DeleteAll();
+      return View["cleared.cshtml"];
+    };
+     Get["/categories/{id}"] = parameters => {
+       Dictionary<string, object> model = new Dictionary<string, object>();
+       var SelectedCategory = Category.Find(parameters.id);
+       var CategoryTasks = SelectedCategory.GetTasks();
+       model.Add("category", SelectedCategory);
+       model.Add("tasks", CategoryTasks);
+       return View["category.cshtml", model];
+     };
     }
   }
 }

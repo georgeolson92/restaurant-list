@@ -32,8 +32,8 @@ namespace ToDoList.Objects
     public void Test_Equal_ReturnsTrueIfDescriptionsAreTheSame()
     {
       //Arrange, Act
-      Task firstTask = new Task("Mow the lawn", 1);
-      Task secondTask = new Task("Mow the lawn", 1);
+      Task firstTask = new Task("Mow the lawn", 1, new DateTime(2015, 1, 18));
+      Task secondTask = new Task("Mow the lawn", 1, new DateTime(2015, 1, 18));
 
       //Assert
       Assert.Equal(firstTask, secondTask);
@@ -43,7 +43,7 @@ namespace ToDoList.Objects
     public void Test_Save_SavesToDatabase()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1, new DateTime(2015, 1, 18));
 
       //Act
       testTask.Save();
@@ -58,7 +58,7 @@ namespace ToDoList.Objects
     public void Test_Save_AssignsIdToObject()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
 
       //Act
       testTask.Save();
@@ -75,7 +75,7 @@ namespace ToDoList.Objects
     public void Test_Find_FindsTaskInDatabase()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
       testTask.Save();
 
       //Act
@@ -89,8 +89,8 @@ namespace ToDoList.Objects
     public void Test_EqualOverrideTrueForSameDescription()
     {
       //Arrange, Act
-      Task firstTask = new Task("Mow the lawn", 1);
-      Task secondTask = new Task("Mow the lawn", 1);
+      Task firstTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
+      Task secondTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
 
       //Assert
       Assert.Equal(firstTask, secondTask);
@@ -100,7 +100,7 @@ namespace ToDoList.Objects
     public void Test_Save()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
       testTask.Save();
 
       //Act
@@ -115,7 +115,7 @@ namespace ToDoList.Objects
     public void Test_SaveAssignsIdToObject()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
       testTask.Save();
 
       //Act
@@ -132,7 +132,7 @@ namespace ToDoList.Objects
     public void Test_FindFindsTaskInDatabase()
     {
       //Arrange
-      Task testTask = new Task("Mow the lawn", 1);
+      Task testTask = new Task("Mow the lawn", 1 , new DateTime(2015, 1, 18));
       testTask.Save();
 
       //Act

@@ -9,7 +9,8 @@ else
   <ol>
     @foreach (var task in @Model["tasks"])
     {
-      <li>@task.GetDescription()</li>
+      <li>@task.GetDescription()<br>
+        Due: @task.GetDueDate()</li>
     }
   </ol>
 }

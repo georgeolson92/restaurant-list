@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ToDoList.Objects
+namespace RestaurantList.Objects
 {
   public class DB
   {

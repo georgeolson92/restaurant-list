@@ -1,58 +1,58 @@
 using System.Collections.Generic;
 using System;
 using Nancy;
-using ToDoList.Objects;
+using RestaurantList.Objects;
 
-namespace ToDoList
+namespace RestaurantList
 {
   public class HomeModule : NancyModule
   {
     public HomeModule()
     {
       Get["/"] = _ => {
-        List<Category> AllCategories = Category.GetAll();
-        return View["index.cshtml", AllCategories];
+        List<Cuisine> AllCuisines = Cuisine.GetAll();
+        return View["index.cshtml", AllCuisines];
       };
-      Get["/tasks"] = _ => {
-        List<Task> AllTasks = Task.GetAll();
-        return View["tasks.cshtml", AllTasks];
+      Get["/restaurants"] = _ => {
+        List<Restaurant> AllRestaurants = Restaurant.GetAll();
+        return View["Restaurants.cshtml", AllRestaurants];
       };
-      Get["/categories"] = _ => {
-        List<Category> AllCategories = Category.GetAll();
-        return View["categories.cshtml", AllCategories];
+      Get["/cuisines"] = _ => {
+        List<Cuisine> AllCuisines = Cuisine.GetAll();
+        return View["cuisines.cshtml", AllCuisines];
       };
-      Get["/categories/new"] = _ => {
-        return View["categories_form.cshtml"];
+      Get["/cuisines/new"] = _ => {
+        return View["cuisines_form.cshtml"];
       };
-      Post["/categories/new"] = _ => {
-        Category newCategory = new Category(Request.Form["category-name"]);
-        newCategory.Save();
+      Post["/cuisines/new"] = _ => {
+        Cuisine newCuisine = new Cuisine(Request.Form["cuisine-name"]);
+        newCuisine.Save();
         return View["success.cshtml"];
       };
-      Get["/tasks/new"] = _ => {
-        List<Category> AllCategories = Category.GetAll();
-        return View["task_form.cshtml", AllCategories];
+      Get["/restaurants/new"] = _ => {
+        List<Cuisine> AllCuisines = Cuisine.GetAll();
+        return View["Restaurant_form.cshtml", AllCuisines];
       };
-      Post["/tasks/new"] = _ => {
-        Task newTask = new Task(Request.Form["task-description"], Request.Form["category-id"], Request.Form["due-date"]);
-        newTask.Save();
+      Post["/restaurants/new"] = _ => {
+        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-description"], Request.Form["cuisine-id"], Request.Form["due-date"]);
+        newRestaurant.Save();
         return View["success.cshtml"];
       };
-      Post["/tasks/delete"] = _ => {
-       Task.DeleteAll();
+      Post["/restaurants/delete"] = _ => {
+       Restaurant.DeleteAll();
        return View["cleared.cshtml"];
      };
-     Post["/categories/delete"] = _ => {
-      Category.DeleteAll();
+     Post["/cuisines/delete"] = _ => {
+      Cuisine.DeleteAll();
       return View["cleared.cshtml"];
     };
-     Get["/categories/{id}"] = parameters => {
+     Get["/cuisines/{id}"] = parameters => {
        Dictionary<string, object> model = new Dictionary<string, object>();
-       var SelectedCategory = Category.Find(parameters.id);
-       var CategoryTasks = SelectedCategory.GetTasks();
-       model.Add("category", SelectedCategory);
-       model.Add("tasks", CategoryTasks);
-       return View["category.cshtml", model];
+       var SelectedCuisine = Cuisine.Find(parameters.id);
+       var CuisineRestaurants = SelectedCuisine.GetRestaurants();
+       model.Add("cuisine", SelectedCuisine);
+       model.Add("Restaurants", CuisineRestaurants);
+       return View["cuisine.cshtml", model];
      };
     }
   }

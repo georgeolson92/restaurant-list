@@ -10,7 +10,7 @@ namespace RestaurantList.Objects
   {
     public RestaurantTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurantlist;Integrated Security=SSPI;";
+      DBConfiguration.ConnectionString = "Server=tcp:epicodus.database.windows.net,1433;Initial Catalog=restaurant;Persist Security Info=False;User ID=georgeolson92;Password=Fuckers!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
     }
 
     public void Dispose()

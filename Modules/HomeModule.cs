@@ -15,7 +15,7 @@ namespace RestaurantList
       };
       Get["/restaurants"] = _ => {
         List<Restaurant> AllRestaurants = Restaurant.GetAll();
-        return View["Restaurants.cshtml", AllRestaurants];
+        return View["restaurants.cshtml", AllRestaurants];
       };
       Get["/cuisines"] = _ => {
         List<Cuisine> AllCuisines = Cuisine.GetAll();
@@ -31,10 +31,10 @@ namespace RestaurantList
       };
       Get["/restaurants/new"] = _ => {
         List<Cuisine> AllCuisines = Cuisine.GetAll();
-        return View["Restaurant_form.cshtml", AllCuisines];
+        return View["restaurant_form.cshtml", AllCuisines];
       };
       Post["/restaurants/new"] = _ => {
-        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-description"], Request.Form["cuisine-id"], Request.Form["due-date"]);
+        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-description"], Request.Form["cuisine-id"]);
         newRestaurant.Save();
         return View["success.cshtml"];
       };
@@ -51,7 +51,7 @@ namespace RestaurantList
        var SelectedCuisine = Cuisine.Find(parameters.id);
        var CuisineRestaurants = SelectedCuisine.GetRestaurants();
        model.Add("cuisine", SelectedCuisine);
-       model.Add("Restaurants", CuisineRestaurants);
+       model.Add("restaurants", CuisineRestaurants);
        return View["cuisine.cshtml", model];
      };
     }

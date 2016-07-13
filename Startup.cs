@@ -40,6 +40,6 @@ namespace RestaurantList
   }
   public static class DBConfiguration
     {
-        public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurantlist;Integrated Security=SSPI;";
+        public static string ConnectionString = "Server=tcp:epicodus.database.windows.net,1433;Initial Catalog=restaurant;Persist Security Info=False;User ID=georgeolson92;Password=Fuckers!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
     }
 }

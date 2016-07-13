@@ -1,0 +1,19 @@
+<h2> Restaurant List </h2>
+
+<ul>
+
+@foreach (var restaurant in @Model)
+{
+  <li>@restaurant.GetDescription()</li>
+}
+
+</ul>
+
+<form action="/allrestaurants" method="post">
+  <label for="newrestaurant">Create A New Restaurant</label>
+  <input id="newrestaurant" name="newrestaurant">
+  <button type="submit">Add Restaurant</button>
+</form>
+<form action="/clearedrestaurants" method="post">
+  <button type="submit">Clear All Restaurants</button>
+</form>
